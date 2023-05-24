@@ -1,19 +1,36 @@
 import Class from "./ListItem.module.css";
-import {RiCheckboxBlankCircleLine, RiCheckboxBlankCircleFill, RiPencilFill, RiDeleteBin6Line} from "react-icons/ri";
+import {
+  RiCheckboxBlankCircleLine,
+  RiCheckboxBlankCircleFill,
+  RiPencilFill,
+  RiDeleteBin6Line,
+  RiAddFill,
+} from "react-icons/ri";
 
 function ListItem(props) {
   return (
     <div className={Class.item}>
       <div className={Class.titleGroup}>
-        <div className={Class.circle}>
-          <RiCheckboxBlankCircleLine />
+        {!props.isForm && (
+          <div className={Class.circle}>
+            <RiCheckboxBlankCircleLine />
+          </div>
+        )}
+        <div className={Class.title}>{props.children}</div>
+      </div>
+
+      {props.isForm && (
+        <button className={Class.actionGroup}>
+          <RiAddFill />
+        </button>
+      )}
+
+      {!props.isForm && (
+        <div className={Class.actionGroup}>
+          <RiPencilFill />
+          <RiDeleteBin6Line />
         </div>
-        <p className={Class.title}>{props.title}</p>
-      </div>
-      <div className={Class.actionGroup}>
-        <RiPencilFill />
-        <RiDeleteBin6Line />
-      </div>
+      )}
     </div>
   );
 }

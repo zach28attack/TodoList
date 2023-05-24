@@ -1,5 +1,6 @@
 .item {
   border: 0.1rem solid #525e75;
+  border-radius: 0.2rem;
   padding: 0.4rem 1rem;
   margin: 1rem;
   width: 70%;
@@ -22,4 +23,7 @@
   flex-direction: column;
   font-size: 1.2rem;
   gap: 1.5rem;
+  background-color: transparent;
+  border: none;
+  color: #525e75;
 }
