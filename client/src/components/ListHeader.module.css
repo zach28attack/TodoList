@@ -1,0 +1,21 @@
+.button {
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  color: #525e75;
+}
+.button:hover {
+  color: #525e75bd;
+}
+.button:active {
+  color: #525e75;
+}
+
+.header {
+  border-bottom: solid 0.1rem #525e75;
+  height: 3rem;
+  width: 80%;
+  margin-left: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}

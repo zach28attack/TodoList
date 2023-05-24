@@ -7,7 +7,7 @@ function Collections() {
     <div className={Class.border}>
       <h1 className={Class.header}>Collections</h1>
       {collections.map((item) => (
-        <Collection title={item} />
+        <Collection title={item} key={item} />
       ))}
     </div>
   );
