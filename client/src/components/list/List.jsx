@@ -8,8 +8,9 @@ function List() {
     <>
       <div>
         <ListHeader />
+        <div id="list-form-root"></div>
         {items.map((item) => (
-          <ListItem title={item} />
+          <ListItem key={item}>{item}</ListItem> //update key with id
         ))}
       </div>
     </>
