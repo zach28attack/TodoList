@@ -1,0 +1,8 @@
+.collection {
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  font-size: 1.5rem;
+  border-bottom: solid 1px black;
+  justify-content: center;
+}

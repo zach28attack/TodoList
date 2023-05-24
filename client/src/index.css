@@ -1,0 +1,10 @@
+:root {
+  background-color: var(--tan);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  --green: #92ba92;
+  --dark-green: #78938a;
+  --grey: #525e75;
+  --tan: #f1ddbf;
+}
