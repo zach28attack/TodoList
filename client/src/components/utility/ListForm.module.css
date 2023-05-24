@@ -1,0 +1,15 @@
+.input {
+  font-size: 2rem;
+  font-family: inherit;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: #525e75;
+  margin: auto 0;
+}
+.button {
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  color: #525e75;
+}
