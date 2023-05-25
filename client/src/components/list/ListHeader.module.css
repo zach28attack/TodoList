@@ -19,3 +19,13 @@
   display: flex;
   justify-content: space-between;
 }
+.addButton {
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  color: #525e75;
+  transition: transform 0.5s;
+}
+.rotate {
+  transform: rotate(45deg);
+}

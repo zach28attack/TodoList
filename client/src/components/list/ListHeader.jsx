@@ -6,8 +6,11 @@ import {useState} from "react";
 
 function ListHeader() {
   const [showForm, setShowForm] = useState(false);
+  const [isRotated, setIsRotated] = useState(false);
+
   const renderFormHandler = () => {
-    setShowForm(true);
+    setShowForm(!showForm);
+    setIsRotated(!isRotated);
   };
 
   return (
@@ -16,10 +19,10 @@ function ListHeader() {
         <RiAccountCircleLine />
       </button>
 
-      <button className={Class.button} onClick={renderFormHandler}>
+      <button className={`${Class.addButton} ${isRotated ? Class.rotate : undefined}`} onClick={renderFormHandler}>
         <RiAddCircleLine />
-        {showForm && createPortal(<ListForm />, document.getElementById("list-form-root"))}
       </button>
+      {showForm && createPortal(<ListForm />, document.getElementById("list-form-root"))}
     </div>
   );
 }
