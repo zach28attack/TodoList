@@ -4,11 +4,16 @@ import ListForm from "../utility/ListForm.jsx";
 import {createPortal} from "react-dom";
 import {useState} from "react";
 
-function ListHeader() {
+function ListHeader(props) {
   const [showForm, setShowForm] = useState(false);
   const [isRotated, setIsRotated] = useState(false);
 
   const renderFormHandler = () => {
+    setShowForm(!showForm);
+    setIsRotated(!isRotated);
+  };
+  const submitHandler = (item) => {
+    props.submitHandler(item);
     setShowForm(!showForm);
     setIsRotated(!isRotated);
   };
@@ -22,7 +27,7 @@ function ListHeader() {
       <button className={`${Class.addButton} ${isRotated ? Class.rotate : undefined}`} onClick={renderFormHandler}>
         <RiAddCircleLine />
       </button>
-      {showForm && createPortal(<ListForm />, document.getElementById("list-form-root"))}
+      {showForm && createPortal(<ListForm submitHandler={submitHandler} />, document.getElementById("list-form-root"))}
     </div>
   );
 }
