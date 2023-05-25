@@ -24,15 +24,9 @@ function ListItem(props) {
       </div>
 
       {!props.isForm && (
-        <div className={Class.actionGroup}>
-          <button className={Class.button}>
-            <RiPencilFill />
-          </button>
-
-          <button className={Class.button} onClick={onDeleteItem}>
-            <RiDeleteBin6Line />
-          </button>
-        </div>
+        <button className={Class.button} onClick={onDeleteItem}>
+          <RiDeleteBin6Line />
+        </button>
       )}
     </div>
   );
