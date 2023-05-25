@@ -8,8 +8,9 @@
   align-items: center;
   justify-content: space-between;
 }
-.circle {
+.checkbox {
   margin-right: 0.5rem;
+  font-size: 1.3rem;
 }
 .titleGroup {
   display: flex;
