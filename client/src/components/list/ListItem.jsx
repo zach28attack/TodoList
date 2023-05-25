@@ -19,12 +19,6 @@ function ListItem(props) {
         <div className={Class.title}>{props.children}</div>
       </div>
 
-      {props.isForm && (
-        <button className={Class.actionGroup}>
-          <RiAddFill />
-        </button>
-      )}
-
       {!props.isForm && (
         <div className={Class.actionGroup}>
           <RiPencilFill />
