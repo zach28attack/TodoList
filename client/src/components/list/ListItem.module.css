@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 2.5rem;
 }
 .checkbox {
   margin-right: 0.5rem;
@@ -19,17 +20,11 @@
 .title {
   font-size: 2rem;
 }
-.actionGroup {
-  display: flex;
-  flex-direction: column;
-  font-size: 1.2rem;
-  gap: 1.5rem;
-}
 .button {
   background-color: transparent;
   border: none;
   color: #525e75;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 .button:hover {
   color: #525e75b1;
