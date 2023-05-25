@@ -26,6 +26,9 @@
   color: #525e75;
   transition: transform 0.5s;
 }
+.addButton:hover {
+  color: #525e75bd;
+}
 .rotate {
   transform: rotate(45deg);
 }
