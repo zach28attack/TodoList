@@ -2,6 +2,9 @@ import Class from "./ListItem.module.css";
 import {RiCheckboxBlankCircleLine, RiCheckboxBlankCircleFill, RiPencilFill, RiDeleteBin6Line} from "react-icons/ri";
 
 function ListItem(props) {
+  const onDeleteItem = () => {
+    props.onDeleteItem(props.id);
+  };
   return (
     <div className={Class.item}>
       <div className={Class.titleGroup}>
@@ -15,8 +18,13 @@ function ListItem(props) {
 
       {!props.isForm && (
         <div className={Class.actionGroup}>
-          <RiPencilFill />
-          <RiDeleteBin6Line />
+          <button className={Class.button}>
+            <RiPencilFill />
+          </button>
+
+          <button className={Class.button} onClick={onDeleteItem}>
+            <RiDeleteBin6Line />
+          </button>
         </div>
       )}
     </div>
