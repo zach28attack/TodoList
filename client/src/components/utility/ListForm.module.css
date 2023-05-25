@@ -13,3 +13,8 @@
   border: none;
   color: #525e75;
 }
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
