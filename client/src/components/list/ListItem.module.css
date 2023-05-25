@@ -23,7 +23,13 @@
   flex-direction: column;
   font-size: 1.2rem;
   gap: 1.5rem;
+}
+.button {
   background-color: transparent;
   border: none;
   color: #525e75;
+  font-size: 1rem;
+}
+.button:hover {
+  color: #525e75b1;
 }
