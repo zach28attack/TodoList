@@ -1,11 +1,5 @@
 import Class from "./ListItem.module.css";
-import {
-  RiCheckboxBlankCircleLine,
-  RiCheckboxBlankCircleFill,
-  RiPencilFill,
-  RiDeleteBin6Line,
-  RiAddFill,
-} from "react-icons/ri";
+import {RiCheckboxBlankCircleLine, RiCheckboxBlankCircleFill, RiPencilFill, RiDeleteBin6Line} from "react-icons/ri";
 
 function ListItem(props) {
   return (
