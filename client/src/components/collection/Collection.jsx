@@ -1,7 +1,14 @@
 import Class from "./Collection.module.css";
 
 function Collection(props) {
-  return <p className={Class.collection}>{props.title}</p>;
+  const clickHandler = () => {
+    props.onCollectionSelect(props.name);
+  };
+  return (
+    <button className={Class.collection} onClick={clickHandler}>
+      {props.name}
+    </button>
+  );
 }
 
 export default Collection;
