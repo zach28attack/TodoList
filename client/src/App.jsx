@@ -29,9 +29,19 @@ function App() {
     });
   };
 
-  const deleteListItemHandler = (e) => {
-    setActiveCollection((prevstate) => {
-      return {...prevstate, items: prevstate.items.filter((item) => item !== e)};
+  const deleteListItemHandler = (itemId) => {
+    setCollections((prevCollections) => {
+      const updatedCollections = [...prevCollections];
+      const index = updatedCollections.findIndex((collection) => {
+        return collection.name === activeCollection.name;
+      });
+
+      if (index !== -1) {
+        updatedCollections[index].items = updatedCollections[index].items.filter((item) => {
+          return item !== itemId; //TODO: update to reflex each items id when connected to db
+        });
+      }
+      return updatedCollections;
     });
   };
 
