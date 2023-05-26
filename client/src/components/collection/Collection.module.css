@@ -1,8 +1,18 @@
 .collection {
   padding: 1rem;
-  margin: 1rem 2rem;
+  margin: 0 2rem;
   display: flex;
+  flex-direction: column;
   font-size: 1.5rem;
   border-bottom: solid 1px black;
   justify-content: center;
+}
+.button {
+  background-color: transparent;
+  border: none;
+  color: #525e75;
+  font-size: 1.4rem;
+}
+.button:hover {
+  color: #525e75b1;
 }

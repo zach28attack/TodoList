@@ -5,8 +5,8 @@ function Collection(props) {
     props.onCollectionSelect(props.name);
   };
   return (
-    <button className={Class.collection} onClick={clickHandler}>
-      {props.name}
+    <button onClick={clickHandler} className={Class.button}>
+      <p className={Class.collection}>{props.name}</p>
     </button>
   );
 }
