@@ -1,12 +1,11 @@
 import Collection from "./Collection.jsx";
 import Class from "./Collections.module.css";
 
-function Collections() {
-  let collections = ["Work", "Home", "Hobby", "Health"];
+function Collections(props) {
   return (
     <div className={Class.border}>
       <h1 className={Class.header}>Lists</h1>
-      {collections.map((item) => (
+      {props.collections.map((item) => (
         <Collection title={item} key={item} />
       ))}
     </div>
