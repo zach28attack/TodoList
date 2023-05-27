@@ -6,7 +6,7 @@ function Collection(props) {
   };
   return (
     <button onClick={clickHandler} className={Class.button}>
-      <p className={Class.collection}>{props.name}</p>
+      <p className={Class.name}>{props.name}</p>
     </button>
   );
 }
