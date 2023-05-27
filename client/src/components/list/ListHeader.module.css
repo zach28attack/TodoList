@@ -30,6 +30,10 @@
 .addButton:hover {
   color: #525e75bd;
 }
+.buttonOrigin {
+  transition: transform 0.5s;
+}
 .rotate {
   transform: rotate(45deg);
+  transform-origin: 50% 50%;
 }

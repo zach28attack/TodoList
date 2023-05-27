@@ -24,8 +24,8 @@ function ListHeader(props) {
         <RiAccountCircleLine />
       </button>
 
-      <button className={`${Class.addButton} ${isRotated ? Class.rotate : undefined}`} onClick={renderFormHandler}>
-        <RiAddCircleLine />
+      <button className={`${Class.addButton}`} onClick={renderFormHandler}>
+        <RiAddCircleLine className={`${Class.buttonOrigin} ${isRotated ? Class.rotate : undefined}`} />
       </button>
       {showForm && createPortal(<ListForm submitHandler={submitHandler} />, document.getElementById("list-form-root"))}
     </div>
