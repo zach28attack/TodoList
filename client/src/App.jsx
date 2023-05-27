@@ -49,10 +49,19 @@ function App() {
     const selectedCollection = collections.filter((collection) => collection.name === name);
     setActiveCollection(selectedCollection[0]);
   };
+  const submitCollectionHandler = (newCollection) => {
+    setCollections((prevCollections) => {
+      return [...prevCollections, {name: newCollection, items: []}];
+    });
+  };
 
   return (
     <div className={app.grid}>
-      <Collections collectionsArray={collections} onCollectionSelect={selectCollectionHandler} />
+      <Collections
+        collectionsArray={collections}
+        onCollectionSelect={selectCollectionHandler}
+        submitCollection={submitCollectionHandler}
+      />
       <List items={activeCollection.items} onDeleteItem={deleteListItemHandler} submitHandler={addListItemHandler} />
     </div>
   );
