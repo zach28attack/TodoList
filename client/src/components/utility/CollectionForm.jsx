@@ -13,12 +13,16 @@ function CollectionForm(props) {
     setInput(e.target.value);
   };
   return (
-    <form className={Class.form}>
-      <button onClick={clickHandler} className={Class.button}>
-        <RiAddFill />
-      </button>
-      <input type="text" placeholder="add" onChange={changeHandler} value={input} className={Class.input}></input>
-    </form>
+    <>
+      {props.formVisible && (
+        <form className={Class.form}>
+          <button onClick={clickHandler} className={Class.button}>
+            <RiAddFill />
+          </button>
+          <input type="text" placeholder="add" onChange={changeHandler} value={input} className={Class.input}></input>
+        </form>
+      )}
+    </>
   );
 }
 

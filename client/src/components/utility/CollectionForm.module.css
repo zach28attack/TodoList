@@ -1,10 +1,12 @@
 .form {
-  padding: 1rem;
+  padding: 0.2rem 1rem;
   margin: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: solid 1px black;
+  transition: transform 0.5s;
+  width: 60%;
 }
 .input {
   font-size: 1.5rem;
@@ -14,8 +16,8 @@
   background-color: transparent;
   border: none;
   color: #525e75;
-  margin: auto 0;
-  padding-bottom: 0.6rem;
+  margin-bottom: 0.6rem;
+  top: 0;
 }
 .button {
   font-size: 1.5rem;
