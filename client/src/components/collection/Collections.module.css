@@ -5,17 +5,18 @@
   flex-direction: column;
   position: relative;
   align-items: center;
+  background-color: #2f6c9d;
 }
 .header {
   text-align: center;
   font-size: 2rem;
+  color: #f1ddbf;
 }
 .button {
   font-size: 1.5rem;
   background-color: transparent;
   border: none;
-  color: #525e75;
-
+  color: #f1ddbf;
   margin-right: 1rem;
   width: 0;
 }
@@ -23,7 +24,7 @@
   transition: transform 0.5s;
 }
 .button:hover {
-  color: #525e75bd;
+  color: #f1ddbfbd;
 }
 .rotate {
   transform: rotate(-45deg);
