@@ -1,6 +1,7 @@
 import ListHeader from "./ListHeader.jsx";
 import ListItem from "./ListItem.jsx";
 import Class from "./List.module.css";
+import Footer from "../utility/Footer.jsx";
 
 function List(props) {
   return (
@@ -12,6 +13,7 @@ function List(props) {
           {item}
         </ListItem> //update key with id
       ))}
+      <Footer />
     </div>
   );
 }
