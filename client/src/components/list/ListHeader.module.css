@@ -3,6 +3,7 @@
   background-color: transparent;
   border: none;
   color: #525e75;
+  z-index: 1;
 }
 .button:hover {
   color: #525e75bd;
@@ -18,6 +19,8 @@
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  position: relative;
 }
 .addButton {
   font-size: 2rem;
