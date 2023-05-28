@@ -4,9 +4,13 @@ function AccountMenu(props) {
   return (
     <div className={props.className}>
       <ul className={Class.list}>
-        <li className={Class.listItem}>Account</li>
+        <li>
+          <button className={Class.button}>Account</button>
+        </li>
         <li className={Class.listItem}>|</li>
-        <li className={Class.listItem}>Sign-out</li>
+        <li>
+          <button className={Class.button}>Sign-out</button>
+        </li>
       </ul>
     </div>
   );
