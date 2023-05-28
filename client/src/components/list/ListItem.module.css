@@ -3,11 +3,13 @@
   border-radius: 0.2rem;
   padding: 0.4rem 1rem;
   margin: 1rem;
-  width: 70%;
+  min-width: 4rem;
+  max-width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 2.5rem;
+  background-color: #f1ddbf;
 }
 .checkbox {
   margin-right: 0.5rem;

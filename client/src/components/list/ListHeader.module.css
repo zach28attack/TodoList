@@ -13,14 +13,15 @@
 }
 
 .header {
-  border-bottom: solid 0.1rem #525e75;
+  /* border-bottom: solid 0.1rem #525e75; */
   height: 3rem;
-  margin-left: 0.5rem;
-  margin-top: 1rem;
+  padding-left: 1.5rem;
+  padding-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  background-color: #f1ddbf;
 }
 .addButton {
   font-size: 2rem;
