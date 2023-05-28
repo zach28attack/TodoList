@@ -26,6 +26,6 @@
   color: #525e75bd;
 }
 .rotate {
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
   transform-origin: 50% 50%;
 }
