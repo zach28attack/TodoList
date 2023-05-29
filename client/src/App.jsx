@@ -54,9 +54,16 @@ function App() {
       return [...prevCollections, {name: newCollection, items: []}];
     });
   };
-
+  async function connectionTest() {
+    try {
+      const response = await fetch("http://localhost:3000/collection/new");
+    } catch {
+      console.error("error caught:", error);
+    }
+  }
   return (
     <div className={app.grid}>
+      {connectionTest()}
       <Collections
         collectionsArray={collections}
         onCollectionSelect={selectCollectionHandler}
