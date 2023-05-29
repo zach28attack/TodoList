@@ -27,7 +27,12 @@ function Collections(props) {
 
       <CollectionForm submitCollection={submitCollectionHandler} formVisible={formVisible} />
       {props.collectionsArray.map((collection) => (
-        <Collection name={collection.name} key={collection.name} onCollectionSelect={props.onCollectionSelect} />
+        <Collection
+          name={collection.name}
+          key={collection.name}
+          onCollectionSelect={props.onCollectionSelect}
+          activeCollection={props.activeCollection}
+        />
       ))}
     </div>
   );

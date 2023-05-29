@@ -15,8 +15,6 @@
 .header {
   border-bottom: solid 0.1rem #525e75;
   height: 3rem;
-  padding-left: 1.5rem;
-  padding-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

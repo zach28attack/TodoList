@@ -5,7 +5,10 @@ function Collection(props) {
     props.onCollectionSelect(props.name);
   };
   return (
-    <button onClick={clickHandler} className={Class.button}>
+    <button
+      onClick={clickHandler}
+      className={`${Class.button} ${props.activeCollection.name === props.name ? Class.active : ""}`}
+    >
       <p className={Class.name}>{props.name}</p>
     </button>
   );

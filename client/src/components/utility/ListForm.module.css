@@ -1,7 +1,6 @@
 .input {
   font-size: 2rem;
   font-family: inherit;
-  width: 100%;
   background-color: transparent;
   border: none;
   color: #525e75;
@@ -17,4 +16,5 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }

@@ -61,6 +61,7 @@ function App() {
         collectionsArray={collections}
         onCollectionSelect={selectCollectionHandler}
         submitCollection={submitCollectionHandler}
+        activeCollection={activeCollection}
       />
       <List items={activeCollection.items} onDeleteItem={deleteListItemHandler} submitHandler={addListItemHandler} />
     </div>
