@@ -15,7 +15,7 @@
   width: 100%;
   background-color: transparent;
   border: none;
-  color: #525e75;
+  color: #f1ddbf;
   margin-bottom: 0.6rem;
   top: 0;
 }
@@ -23,11 +23,11 @@
   font-size: 1.5rem;
   background-color: transparent;
   border: none;
-  color: #525e75;
+  color: #f1ddbf;
 }
 .button:hover {
-  color: #525e75a8;
+  color: #f1ddbf;
 }
 .button:active {
-  color: #525e75;
+  color: #f1ddbf;
 }
