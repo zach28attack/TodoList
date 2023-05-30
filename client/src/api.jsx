@@ -1,25 +1,15 @@
-export async function deleteAll() {
-  try {
-    const response = await fetch("http://localhost:3000/collections/delete-all", {
-      method: "DELETE",
-    });
-    const data = await response.json();
-    console.log("successful MSG:", data.message);
-  } catch (error) {
-    console.error("error caught:", error);
-  }
-}
-
 export async function fetchAll() {
   try {
     const response = await fetch("http://localhost:3000/collections", {
-      method: "GET",
+      method: "get",
     });
+
     const data = await response.json();
-    console.log("successful MSG:", data.message);
-    return data;
+    console.log("successful MSG:", data);
+    return data.data;
   } catch (error) {
     console.error("error caught:", error);
+    return;
   }
 }
 
