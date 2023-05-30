@@ -7,10 +7,11 @@ async function connectToDatabase() {
   try {
     const client = await MongoClient.connect(url);
     db = client.db();
+
     console.log("connected to database");
     return db;
   } catch (error) {
-    console.error("Error caught:", error);
+    console.error("Error MSG:", error);
   }
 }
 
