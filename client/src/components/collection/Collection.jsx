@@ -7,7 +7,7 @@ function Collection(props) {
   return (
     <button
       onClick={clickHandler}
-      className={`${Class.button} ${props.activeCollection.name === props.name ? Class.active : ""}`}
+      className={`${Class.button} `} // ${props.activeCollection.name === props.name ? Class.active : ""}
     >
       <p className={Class.name}>{props.name}</p>
     </button>

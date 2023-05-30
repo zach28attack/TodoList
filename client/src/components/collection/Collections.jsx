@@ -26,14 +26,16 @@ function Collections(props) {
       </h1>
 
       <CollectionForm submitCollection={submitCollectionHandler} formVisible={formVisible} />
-      {props.collectionsArray.map((collection) => (
-        <Collection
-          name={collection.name}
-          key={collection.name}
-          onCollectionSelect={props.onCollectionSelect}
-          activeCollection={props.activeCollection}
-        />
-      ))}
+      {!props.isLoading
+        ? props.collectionsArray.map((collection) => (
+            <Collection
+              name={collection.name}
+              key={collection._id}
+              onCollectionSelect={props.onCollectionSelect}
+              // activeCollection={props.activeCollection}
+            />
+          ))
+        : undefined}
     </div>
   );
 }
