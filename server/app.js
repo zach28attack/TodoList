@@ -57,25 +57,24 @@ router.delete("/collections/delete-all", (req, res, next) => {
   });
 });
 
-router.delete("/collections/:id", (req, res, next) => {
-  const {id} = req.params.id; // get id from url
-  const collection = new Collection(); // initialize new collection object
+// router.delete("/collections/:id", (req, res, next) => {
+//   const {id} = req.params.id; // get id from url
+//   const collection = new Collection(); // initialize new collection object
 
-  collection.deleteById(id); // delete a collection object from mongoDB database by its id
+//   collection.deleteById(id); // delete a collection object from mongoDB database by its id
 
-  res.status(200).json({
-    message: "All items deleted.",
-  });
-});
+//   res.status(200).json({
+//     message: "All items deleted.",
+//   });
+// });
 
 router.get("/collections", async (req, res, next) => {
   const collection = new Collection(); // initialize new collection object
-  const collections = await collection.fetchAll();
-
   res.status(200).json({
     message: "all collections retrieved",
-    data: collections,
+    data: await collection.fetchAll(),
   });
 });
+app.use(router);
 
 app.listen(3000);
