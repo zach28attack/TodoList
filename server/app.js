@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 const app = express();
 const Collection = require("./models/collection.js");
 
@@ -14,23 +15,67 @@ app.use((req, res, next) => {
 
   next();
 });
-app.use("/", (req, res, next) => {
-  console.log("attempting database connection");
 
-  next();
+// new item route
+router.post("/collection/:collectionName/item", async (req, res, next) => {
+  const collection = new Collection(); // initialize new collection object
+  const name = req.params.collectionName;
+  collection.name = name;
+  collection.itemName = `Collection number: ${Math.random()}`; // set random name
+
+  collection.itemIsCompleted = false; // set property
+
+  collection.saveItem(); // save collection to database
+
+  res.status(200).json({
+    message: "New item was saved",
+  });
 });
 
-app.use("/collection/new", async (req, res, next) => {
-  // console.log("databse:", await db);
+// new collection route
+router.post("/collection", async (req, res, next) => {
+  const collection = new Collection(); // initialize new collection object
 
-  const collection = new Collection();
+  collection.name = `Collection number: ${Math.random()}`; // set random name
 
-  collection.name = "School";
-  collection.isCompleted = false;
-  console.log(collection);
+  collection.isCompleted = false; // set property
 
-  collection.save(db); // Assuming save() is an asynchronous operation, use `await`
-  res.status(200).send("Collection saved successfully");
+  collection.saveCollection(); // save collection to database
+
+  res.status(200).json({
+    message: "list item was saved",
+  });
+});
+
+// DEVELOPMENT ROUTE ONLY
+router.delete("/collections/delete-all", (req, res, next) => {
+  const collection = new Collection(); // initialize new collection object
+  collection.deleteAll(); // delete all collections
+
+  res.status(200).json({
+    message: "All items deleted.",
+  });
+});
+
+router.delete("/collections/:id", (req, res, next) => {
+  const {id} = req.params.id; // get id from url
+  const collection = new Collection(); // initialize new collection object
+
+  collection.deleteById(id); // delete a collection object from mongoDB database by its id
+
+  res.status(200).json({
+    message: "All items deleted.",
+  });
+});
+
+router.get("/collections", async (req, res, next) => {
+  const collection = new Collection(); // initialize new collection object
+  const collections = await collection.fetchAll();
+
+  res.status(200).json({
+    message: "all collections retrieved",
+    data: collections,
+  });
 });
 
 app.listen(3000);
