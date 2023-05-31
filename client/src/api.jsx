@@ -5,7 +5,7 @@ export async function fetchAll() {
     });
 
     const data = await response.json();
-    console.log("successful MSG:", data);
+    // console.log("successful MSG:", data);
     return data.data;
   } catch (error) {
     console.error("error caught:", error);
