@@ -1,5 +1,5 @@
 .border {
-  border-right: 0.1rem solid #525e75;
+  /* border-right: 0.1rem solid #525e75; */
   height: 100%;
   display: flex;
   flex-direction: column;
