@@ -11,7 +11,7 @@ class Collection {
   async saveCollection() {
     try {
       const db = await database.connectToDatabase();
-      db.collection("collections").insertOne({name: this.name, items: [{name: "", itemIsCompleted: undefined}]});
+      db.collection("collections").insertOne({name: this.name, items: []});
     } catch (error) {
       console.error("Error caught", error);
     }
