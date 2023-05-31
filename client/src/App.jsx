@@ -10,16 +10,12 @@ function App() {
       try {
         const collections = await fetchAll();
         setCollections((prevCollections) => [...collections, ...prevCollections]);
-        {
-          console.log("app.jsx:", collections[0]);
-        }
         setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     getCollections();
-
     return;
   }, []);
 
@@ -75,7 +71,6 @@ function App() {
         // submitCollection={submitCollectionHandler}
         activeCollection={activeCollection}
       />
-      {console.log("app.jsx:body", collections)}
       <List
         isLoading={isLoading}
         collection={collections[0]}
