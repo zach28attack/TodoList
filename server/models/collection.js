@@ -12,7 +12,7 @@ class Collection {
   async saveCollection() {
     try {
       const db = await database.connectToDatabase();
-      const result = await db.collection("collections").insertOne({name: this.name, items: this.items});
+      const result = await db.collection("collections").insertOne({name: this.name, items: []});
       return result.insertedId.toString(); // Retrieve the saved object's id
     } catch (error) {
       console.error("Error caught", error);
