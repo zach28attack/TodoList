@@ -53,3 +53,19 @@ export async function saveCollection(name) {
     console.error("error caught:", error);
   }
 }
+
+export async function saveItem(itemName, collectionId) {
+  try {
+    const response = await fetch(`http://localhost:3000/collection/${collectionId}/item`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({itemName: itemName}),
+    });
+    const data = await response.json();
+    console.log("message:", data);
+  } catch (error) {
+    console.error("Failed to save item:", error);
+  }
+}

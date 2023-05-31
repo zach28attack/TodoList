@@ -2,7 +2,7 @@ import app from "./App.module.css";
 import Collections from "./components/collection/Collections.jsx";
 import List from "./components/list/List.jsx";
 import {useState, useEffect} from "react";
-import {fetchAll, saveCollection} from "./api.jsx";
+import {fetchAll, saveCollection, saveItem} from "./api.jsx";
 
 function App() {
   const [collections, setCollections] = useState([]);
@@ -20,18 +20,20 @@ function App() {
     }
   };
 
-  // const addListItemHandler = (item) => {
-  //   setCollections((prevCollections) => {
-  //     const updatedCollections = [...prevCollections];
-  //     const index = updatedCollections.findIndex((collection) => {
-  //       return collection.name === activeCollection.name;
-  //     });
-  //     if (index !== -1) {
-  //       updatedCollections[index].items = [item, ...updatedCollections[index].items];
-  //     }
-  //     return updatedCollections;
-  //   });
-  // };
+  const addListItemHandler = (itemName) => {
+    // console.log("addListItemHandler invoked", itemName, activeCollection._id);
+    saveItem(itemName, activeCollection._id);
+    setCollections((prevCollections) => {
+      const updatedCollections = [...prevCollections];
+      const index = updatedCollections.findIndex((collection) => {
+        return collection._id === activeCollection._id;
+      });
+      if (index !== -1) {
+        updatedCollections[index].items = [{name: itemName, isCompleted: false}, ...updatedCollections[index].items];
+        return updatedCollections;
+      }
+    });
+  };
 
   // const deleteListItemHandler = (itemId) => {
   //   setCollections((prevCollections) => {
@@ -59,6 +61,8 @@ function App() {
     setCollections((prevCollections) => [newCollection, ...prevCollections]);
   };
 
+  // DeleteCollection handler
+
   useEffect(() => {
     getCollections();
 
@@ -78,7 +82,7 @@ function App() {
         isLoading={isLoading}
         collection={activeCollection}
         // onDeleteItem={deleteListItemHandler}
-        // submitHandler={addListItemHandler}
+        submitHandler={addListItemHandler}
       />
     </div>
   );

@@ -21,14 +21,14 @@ app.use(express.json());
 app.use;
 
 // new item route
-router.post("/collection/:collectionName/item", async (req, res, next) => {
+router.post("/collection/:collectionId/item", async (req, res, next) => {
   const collection = new Collection(); // initialize new collection object
-  const name = req.params.collectionName;
-  collection.name = name;
-  collection.itemName = `Collection number: ${Math.random()}`; // set random name
+  const id = req.params.collectionId;
+  const itemName = req.body.itemName;
 
+  collection.id = id;
+  collection.itemName = itemName; // set random name
   collection.itemIsCompleted = false; // set property
-
   collection.saveItem(); // save collection to database
 
   res.status(200).json({
