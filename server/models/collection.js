@@ -42,14 +42,19 @@ class Collection {
       console.error(error);
     }
   }
-  async deleteItemById() {
+  async deleteItemByIndex(index) {
     try {
       const db = await database.connectToDatabase();
-      db.collection("collections")
-        .findOne({_id: new mongoDB.ObjectId(this.id)})
-        .updateOne({_id: new mongoDB.ObjectId(this.id)}, {$pull: {items: {name: this.name}}});
+      const result = await db.collection("collections").updateOne(
+        {_id: new mongoDB.ObjectId(this.id)},
+        {
+          $set: {[`items.${index}`]: ""},
+        }
+      );
+      return 200;
     } catch (error) {
       console.error(error);
+      return 500;
     }
   }
 

@@ -4,7 +4,7 @@ import {useState} from "react";
 
 function ListItem(props) {
   const onDeleteItem = () => {
-    props.onDeleteItem(props.id);
+    props.onDeleteItem(props.id, props.collectionId);
   };
   const [isCompleted, setIsCompleted] = useState(false);
 

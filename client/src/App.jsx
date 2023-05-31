@@ -2,7 +2,7 @@ import app from "./App.module.css";
 import Collections from "./components/collection/Collections.jsx";
 import List from "./components/list/List.jsx";
 import {useState, useEffect} from "react";
-import {fetchAll, saveCollection, saveItem} from "./api.jsx";
+import {fetchAll, saveCollection, saveItem, deleteItemByIndex} from "./api.jsx";
 
 function App() {
   const [collections, setCollections] = useState([]);
@@ -35,21 +35,22 @@ function App() {
     });
   };
 
-  // const deleteListItemHandler = (itemId) => {
-  //   setCollections((prevCollections) => {
-  //     const updatedCollections = [...prevCollections];
-  //     const index = updatedCollections.findIndex((collection) => {
-  //       return collection.name === activeCollection.name;
-  //     });
+  const deleteListItemHandler = (itemIndex, collectionId) => {
+    deleteItemByIndex(itemIndex, collectionId);
+    setCollections((prevCollections) => {
+      const updatedCollections = [...prevCollections];
+      const index = updatedCollections.findIndex((collection) => {
+        return collection._id === collectionId;
+      });
 
-  //     if (index !== -1) {
-  //       updatedCollections[index].items = updatedCollections[index].items.filter((item) => {
-  //         return item !== itemId; //TODO: update to reflex each items id when connected to db
-  //       });
-  //     }
-  //     return updatedCollections;
-  //   });
-  // };
+      if (index !== -1) {
+        updatedCollections[index].items = updatedCollections[index].items.filter((item, index) => {
+          return index !== itemIndex; //TODO: update to reflex each items id when connected to db
+        });
+      }
+      return updatedCollections;
+    });
+  };
 
   const selectCollectionHandler = (id) => {
     setActiveCollection(collections.find((collection) => collection._id.toString() === id.toString()));
@@ -81,7 +82,7 @@ function App() {
       <List
         isLoading={isLoading}
         collection={activeCollection}
-        // onDeleteItem={deleteListItemHandler}
+        onDeleteItem={deleteListItemHandler}
         submitHandler={addListItemHandler}
       />
     </div>

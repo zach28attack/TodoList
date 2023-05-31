@@ -36,6 +36,25 @@ router.post("/collection/:collectionId/item", async (req, res, next) => {
   });
 });
 
+// delete item route
+router.delete("/collection/:collectionId/item/:itemIndex", async (req, res, next) => {
+  const collection = new Collection(); // initialize new collection object
+  const id = req.params.collectionId;
+  const itemIndex = req.params.itemIndex;
+
+  collection.id = id;
+  const status = await collection.deleteItemByIndex(itemIndex);
+  if (status === 200) {
+    res.status(200).json({
+      message: "Item was deleted",
+    });
+  } else {
+    res.status(500).json({
+      message: "Item was not deleted",
+    });
+  }
+});
+
 // new collection route
 router.post("/collection", async (req, res, next) => {
   const collection = new Collection(); // initialize new collection object
