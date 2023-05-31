@@ -3,6 +3,7 @@ import Class from "./Collections.module.css";
 import CollectionForm from "../utility/CollectionForm.jsx";
 import {useState} from "react";
 import {RiAddCircleLine} from "react-icons/ri";
+import {AiOutlineLoading} from "react-icons/ai";
 
 function Collections(props) {
   const [isRotated, setIsRotated] = useState(false);
@@ -26,16 +27,20 @@ function Collections(props) {
       </h1>
 
       <CollectionForm submitCollection={submitCollectionHandler} formVisible={formVisible} />
-      {!props.isLoading
-        ? props.collectionsArray.map((collection) => (
-            <Collection
-              name={collection.name}
-              key={collection._id}
-              onCollectionSelect={props.onCollectionSelect}
-              // activeCollection={props.activeCollection}
-            />
-          ))
-        : undefined}
+      {/* this form will only render if the formVisible prop equals true */}
+
+      {!props.isLoading ? (
+        props.collectionsArray.map((collection) => (
+          <Collection
+            name={collection.name}
+            key={collection._id}
+            onCollectionSelect={props.onCollectionSelect}
+            // activeCollection={props.activeCollection}
+          />
+        ))
+      ) : (
+        <AiOutlineLoading className={Class.loading} />
+      )}
     </div>
   );
 }
