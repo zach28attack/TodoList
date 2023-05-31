@@ -19,7 +19,7 @@ export async function deleteAll() {
       method: "DELETE",
     });
     const data = await response.json();
-    console.log("successful MSG:", data.message);
+    console.log("message:", data.message);
   } catch (error) {
     console.error("error caught:", error);
   }
@@ -30,7 +30,25 @@ export async function deleteById(id) {
       method: "DELETE",
     });
     const data = await response.json();
-    console.log("successful MSG:", data.message);
+    console.log("message:", data.message);
+  } catch (error) {
+    console.error("error caught:", error);
+  }
+}
+
+export async function saveCollection(name) {
+  try {
+    const response = await fetch(`http://localhost:3000/collection`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({name: name}),
+    });
+
+    const data = await response.json();
+    console.log("message:", data);
+    return data.id;
   } catch (error) {
     console.error("error caught:", error);
   }

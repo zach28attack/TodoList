@@ -2,26 +2,23 @@ import app from "./App.module.css";
 import Collections from "./components/collection/Collections.jsx";
 import List from "./components/list/List.jsx";
 import {useState, useEffect} from "react";
-import {fetchAll} from "./api.jsx";
+import {fetchAll, saveCollection} from "./api.jsx";
 
 function App() {
-  useEffect(() => {
-    const getCollections = async () => {
-      try {
-        const collections = await fetchAll();
-        setCollections((prevCollections) => [...collections, ...prevCollections]);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getCollections();
-    return;
-  }, []);
-
   const [collections, setCollections] = useState([]);
   const [activeCollection, setActiveCollection] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
+  const getCollections = async () => {
+    try {
+      const collections = await fetchAll();
+      setCollections((prevCollections) => [...collections, ...prevCollections]);
+      setIsLoading(false);
+      setActiveCollection(collections[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // const addListItemHandler = (item) => {
   //   setCollections((prevCollections) => {
@@ -56,11 +53,17 @@ function App() {
   //   console.log("collection selection temporarily commented out");
   // };
 
-  // const submitCollectionHandler = (newCollection) => {
-  //   setCollections((prevCollections) => {
-  //     return [...prevCollections, {name: newCollection, items: []}];
-  //   });
-  // };
+  const submitCollectionHandler = async (name) => {
+    const id = await saveCollection(name);
+    console.log("new collection id", id);
+    const newCollection = {_id: id, name: name, items: []};
+    setCollections((prevCollections) => [newCollection, ...prevCollections]);
+  };
+
+  useEffect(() => {
+    getCollections();
+    return;
+  }, []);
 
   return (
     <div className={app.grid}>
@@ -68,15 +71,15 @@ function App() {
         isLoading={isLoading}
         collectionsArray={collections}
         // onCollectionSelect={selectCollectionHandler}
-        // submitCollection={submitCollectionHandler}
+        submitCollection={submitCollectionHandler}
         activeCollection={activeCollection}
       />
-      <List
+      {/* <List
         isLoading={isLoading}
         collection={collections[0]}
         // onDeleteItem={deleteListItemHandler}
         // submitHandler={addListItemHandler}
-      />
+      /> */}
     </div>
   );
 }

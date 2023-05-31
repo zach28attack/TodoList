@@ -16,6 +16,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.json());
+
+app.use;
+
 // new item route
 router.post("/collection/:collectionName/item", async (req, res, next) => {
   const collection = new Collection(); // initialize new collection object
@@ -35,27 +39,25 @@ router.post("/collection/:collectionName/item", async (req, res, next) => {
 // new collection route
 router.post("/collection", async (req, res, next) => {
   const collection = new Collection(); // initialize new collection object
+  const data = req.body;
 
-  collection.name = `Collection number: ${Math.random()}`; // set random name
-
-  collection.isCompleted = false; // set property
-
-  collection.saveCollection(); // save collection to database
-
+  collection.name = data.name;
+  const savedCollectionId = await collection.saveCollection(); // save collection to database
   res.status(200).json({
-    message: "list item was saved",
+    message: "Collection was saved",
+    id: savedCollectionId,
   });
 });
 
 // DEVELOPMENT ROUTE ONLY
-router.delete("/collections/delete-all", (req, res, next) => {
-  const collection = new Collection(); // initialize new collection object
-  collection.deleteAll(); // delete all collections
+// router.delete("/collections/delete-all", (req, res, next) => {
+//   const collection = new Collection(); // initialize new collection object
+//   collection.deleteAll(); // delete all collections
 
-  res.status(200).json({
-    message: "All items deleted.",
-  });
-});
+//   res.status(200).json({
+//     message: "All items deleted.",
+//   });
+// });
 
 // router.delete("/collections/:id", (req, res, next) => {
 //   const {id} = req.params.id; // get id from url

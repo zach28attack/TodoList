@@ -7,8 +7,8 @@ import {AiOutlineLoading} from "react-icons/ai";
 
 function Collections(props) {
   const [isRotated, setIsRotated] = useState(false);
-  const submitCollectionHandler = (e) => {
-    props.submitCollection(e);
+  const submitCollectionHandler = (name) => {
+    props.submitCollection(name);
     setIsRotated(!isRotated);
     setFormVisible(!formVisible);
   };
@@ -35,7 +35,7 @@ function Collections(props) {
             name={collection.name}
             key={collection._id}
             onCollectionSelect={props.onCollectionSelect}
-            // activeCollection={props.activeCollection}
+            activeCollection={props.activeCollection}
           />
         ))
       ) : (
