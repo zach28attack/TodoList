@@ -61,6 +61,7 @@ function App() {
 
   useEffect(() => {
     getCollections();
+
     return;
   }, []);
 
@@ -73,12 +74,12 @@ function App() {
         submitCollection={submitCollectionHandler}
         activeCollection={activeCollection}
       />
-      {/* <List
+      <List
         isLoading={isLoading}
-        collection={collections[0]}
+        collection={activeCollection}
         // onDeleteItem={deleteListItemHandler}
         // submitHandler={addListItemHandler}
-      /> */}
+      />
     </div>
   );
 }

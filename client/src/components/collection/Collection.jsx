@@ -2,7 +2,6 @@ import Class from "./Collection.module.css";
 
 function Collection(props) {
   const clickHandler = () => {
-    console.log(props.id);
     props.onCollectionSelect(props.id);
   };
   return (

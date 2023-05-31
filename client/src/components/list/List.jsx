@@ -9,11 +9,13 @@ function List(props) {
       <ListHeader submitHandler={props.submitHandler} />
       <div id="list-form-root"></div>
       {!props.isLoading
-        ? props.collection.items.map((item) => (
-            <ListItem key={item.id} onDeleteItem={props.onDeleteItem} id={item.id}>
-              {item.name}
-            </ListItem>
-          ))
+        ? props.collection.items.map((item) =>
+            item !== "" ? (
+              <ListItem key={item.name} onDeleteItem={props.onDeleteItem} id={item.name}>
+                {item.name}
+              </ListItem>
+            ) : undefined
+          )
         : undefined}
       <Footer />
     </div>
