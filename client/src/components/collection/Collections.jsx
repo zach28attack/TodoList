@@ -25,9 +25,7 @@ function Collections(props) {
           <RiAddCircleLine className={`${Class.buttonOrigin} ${isRotated ? Class.rotate : undefined}`} />
         </button>
       </h1>
-
-      <CollectionForm submitCollection={submitCollectionHandler} formVisible={formVisible} />
-      {/* this form will only render if the formVisible prop equals true */}
+      {formVisible && <CollectionForm submitCollection={submitCollectionHandler} />}
 
       {!props.isLoading ? (
         props.collectionsArray.map((collection) => (

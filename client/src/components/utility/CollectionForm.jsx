@@ -14,14 +14,14 @@ function CollectionForm(props) {
   };
   return (
     <>
-      {props.formVisible && (
+      {
         <form className={Class.form}>
           <button onClick={clickHandler} className={Class.button}>
             <RiAddFill />
           </button>
           <input type="text" placeholder="add" onChange={changeHandler} value={input} className={Class.input}></input>
         </form>
-      )}
+      }
     </>
   );
 }
