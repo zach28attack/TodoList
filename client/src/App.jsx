@@ -6,7 +6,7 @@ import {fetchAll, saveCollection} from "./api.jsx";
 
 function App() {
   const [collections, setCollections] = useState([]);
-  const [activeCollection, setActiveCollection] = useState();
+  const [activeCollection, setActiveCollection] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const getCollections = async () => {
@@ -49,13 +49,12 @@ function App() {
   //   });
   // };
 
-  // const selectCollectionHandler = (name) => {
-  //   console.log("collection selection temporarily commented out");
-  // };
+  const selectCollectionHandler = (id) => {
+    setActiveCollection(collections.find((collection) => collection._id.toString() === id.toString()));
+  };
 
   const submitCollectionHandler = async (name) => {
     const id = await saveCollection(name);
-    console.log("new collection id", id);
     const newCollection = {_id: id, name: name, items: []};
     setCollections((prevCollections) => [newCollection, ...prevCollections]);
   };
@@ -70,7 +69,7 @@ function App() {
       <Collections
         isLoading={isLoading}
         collectionsArray={collections}
-        // onCollectionSelect={selectCollectionHandler}
+        onCollectionSelect={selectCollectionHandler}
         submitCollection={submitCollectionHandler}
         activeCollection={activeCollection}
       />

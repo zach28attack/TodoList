@@ -34,6 +34,7 @@ function Collections(props) {
           <Collection
             name={collection.name}
             key={collection._id}
+            id={collection._id}
             onCollectionSelect={props.onCollectionSelect}
             activeCollection={props.activeCollection}
           />
