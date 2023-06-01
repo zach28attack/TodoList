@@ -73,6 +73,9 @@ export async function saveNewUser(email, password, passwordConfirmation) {
   try {
     const response = await fetch(`http://localhost:3000/user`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({email: email, password: password, passwordConfirmation: passwordConfirmation}),
     });
     const data = await response.json();
