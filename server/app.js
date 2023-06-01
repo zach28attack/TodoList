@@ -2,100 +2,38 @@ const express = require("express");
 const router = express.Router();
 const app = express();
 const Collection = require("./models/collection.js");
+const User = require("./models/user.js");
+const ItemsController = require("./controllers/items.js");
+const UsersController = require("./controllers/users.js");
+const CollectionsController = require("./controllers/collections.js");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   // the * gives access every url, or you can specify multiple urls separated with commas
-
   res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH, DELETE");
   //you need to specify which methods should be available
-
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   // allow headers
-
   next();
 });
 
+// parse body json
 app.use(express.json());
 
-app.use;
+// new user route
+app.post("/user", UsersController.saveNewUser);
 
 // new item route
-router.post("/collection/:collectionId/item", async (req, res, next) => {
-  const collection = new Collection(); // initialize new collection object
-  const id = req.params.collectionId;
-  const itemName = req.body.itemName;
-
-  collection.id = id;
-  collection.itemName = itemName; // set random name
-  collection.itemIsCompleted = false; // set property
-  collection.saveItem(); // save collection to database
-
-  res.status(200).json({
-    message: "New item was saved",
-  });
-});
+router.post("/collection/:collectionId/item", ItemsController.saveNewItem);
 
 // delete item route
-router.delete("/collection/:collectionId/item/:itemIndex", async (req, res, next) => {
-  const collection = new Collection(); // initialize new collection object
-  const id = req.params.collectionId;
-  const itemIndex = req.params.itemIndex;
-
-  collection.id = id;
-  const status = await collection.deleteItemByIndex(itemIndex);
-  if (status === 200) {
-    res.status(200).json({
-      message: "Item was deleted",
-    });
-  } else {
-    res.status(500).json({
-      message: "Item was not deleted",
-    });
-  }
-});
+router.delete("/collection/:collectionId/item/:itemIndex", ItemsController.deleteItem);
 
 // new collection route
-router.post("/collection", async (req, res, next) => {
-  const collection = new Collection(); // initialize new collection object
-  const data = req.body;
+router.post("/collection", CollectionsController.saveNewCollection);
 
-  collection.name = data.name;
-  const savedCollectionId = await collection.saveCollection(); // save collection to database
-  res.status(200).json({
-    message: "Collection was saved",
-    id: savedCollectionId,
-  });
-});
-
-// DEVELOPMENT ROUTE ONLY
-// router.delete("/collections/delete-all", (req, res, next) => {
-//   const collection = new Collection(); // initialize new collection object
-//   collection.deleteAll(); // delete all collections
-
-//   res.status(200).json({
-//     message: "All items deleted.",
-//   });
-// });
-
-// router.delete("/collections/:id", (req, res, next) => {
-//   const {id} = req.params.id; // get id from url
-//   const collection = new Collection(); // initialize new collection object
-
-//   collection.deleteById(id); // delete a collection object from mongoDB database by its id
-
-//   res.status(200).json({
-//     message: "All items deleted.",
-//   });
-// });
-
-router.get("/collections", async (req, res, next) => {
-  const collection = new Collection(); // initialize new collection object
-  res.status(200).json({
-    message: "all collections retrieved",
-    data: await collection.fetchAll(),
-  });
-});
+// get all collections route
+router.get("/collections", CollectionsController.getAllCollections);
 app.use(router);
 
 app.listen(3000);

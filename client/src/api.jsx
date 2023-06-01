@@ -12,17 +12,6 @@ export async function fetchAll() {
     return;
   }
 }
-// export async function deleteAll() {
-//   try {
-//     const response = await fetch("http://localhost:3000/collections/delete-all", {
-//       method: "DELETE",
-//     });
-//     const data = await response.json();
-//     console.log("message:", data.message);
-//   } catch (error) {
-//     console.error("error caught:", error);
-//   }
-// }
 export async function deleteCollectionById(id) {
   try {
     const response = await fetch(`http://localhost:3000/collections/${id}`, {
@@ -77,5 +66,18 @@ export async function deleteItemByIndex(index, collectionId) {
     console.log("message:", data.message);
   } catch (error) {
     console.error("error caught:", error);
+  }
+}
+
+export async function saveNewUser(email, password, passwordConfirmation) {
+  try {
+    const response = await fetch(`http://localhost:3000/user`, {
+      method: "POST",
+      body: JSON.stringify({email: email, password: password, passwordConfirmation: passwordConfirmation}),
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
   }
 }
