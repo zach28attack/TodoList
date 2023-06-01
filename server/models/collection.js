@@ -3,7 +3,7 @@ const mongoDB = require("mongodb");
 
 class Collection {
   constructor(id, name, items, itemName, itemIsCompleted) {
-    this.id = id;
+    this._id = id;
     this.name = name;
     this.items = items;
     this.itemIsCompleted = itemIsCompleted;
@@ -24,7 +24,7 @@ class Collection {
       const db = await database.connectToDatabase();
       db.collection("collections").updateOne(
         {
-          _id: new mongoDB.ObjectId(this.id),
+          _id: new mongoDB.ObjectId(this._id),
         },
         {
           $push: {items: {name: this.itemName, isCompleted: this.itemIsCompleted}},
@@ -37,7 +37,7 @@ class Collection {
   async deleteCollectionById() {
     try {
       const db = await database.connectToDatabase();
-      db.collection("collections").deleteOne({_id: new mongoDB.ObjectId(this.id)});
+      db.collection("collections").deleteOne({_id: new mongoDB.ObjectId(this._id)});
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +46,7 @@ class Collection {
     try {
       const db = await database.connectToDatabase();
       const result = await db.collection("collections").updateOne(
-        {_id: new mongoDB.ObjectId(this.id)},
+        {_id: new mongoDB.ObjectId(this._id)},
         {
           $set: {[`items.${index}`]: ""},
         }
