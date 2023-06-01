@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const app = express();
-const Collection = require("./models/collection.js");
-const User = require("./models/user.js");
 const ItemsController = require("./controllers/items.js");
 const UsersController = require("./controllers/users.js");
 const CollectionsController = require("./controllers/collections.js");
+const configureSession = require("./sessions");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -17,11 +16,19 @@ app.use((req, res, next) => {
   next();
 });
 
+configureSession(app);
+
 // parse body json
 app.use(express.json());
 
 // new user route
-app.post("/user", UsersController.saveNewUser);
+router.post("/user", UsersController.signup);
+
+// delete user by id
+router.delete("/user/:id", UsersController.deleteUser);
+
+// new session route
+router.post("./session/:userId", UsersController.login);
 
 // new item route
 router.post("/collection/:collectionId/item", ItemsController.saveNewItem);
@@ -34,6 +41,10 @@ router.post("/collection", CollectionsController.saveNewCollection);
 
 // get all collections route
 router.get("/collections", CollectionsController.getAllCollections);
+
+// DEVELOPMENT ONLY
+app.use("/delete-all-users", UsersController.deleteAll);
+
 app.use(router);
 
 app.listen(3000);
