@@ -1,6 +1,7 @@
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const configureSessions = () => {
+
+const configureSessions = (app) => {
   const store = new MongoDBStore({
     uri: "mongodb+srv://zach28attack:MongoDBPassword@cluster0.im0uft8.mongodb.net/?retryWrites=true&w=majority",
     collection: "sessions",
@@ -16,4 +17,4 @@ const configureSessions = () => {
   );
 };
 
-exports.configureSessions = configureSessions;
+module.exports = configureSessions;
