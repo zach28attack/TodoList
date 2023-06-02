@@ -4,7 +4,7 @@ const app = express();
 const ItemsController = require("./controllers/items.js");
 const UsersController = require("./controllers/users.js");
 const CollectionsController = require("./controllers/collections.js");
-const configureSession = require("./sessions");
+// const configureSession = require("./sessions");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 
-configureSession(app);
+// configureSession(app);
 
 // parse body json
 app.use(express.json());
@@ -28,7 +28,10 @@ router.post("/user", UsersController.signup);
 router.delete("/user/:id", UsersController.deleteUser);
 
 // new session route
-router.post("./session/:userId", UsersController.login);
+router.post("./user/login", UsersController.login);
+
+// delete session route
+router.get("./user/logout", UsersController.logout);
 
 // new item route
 router.post("/collection/:collectionId/item", ItemsController.saveNewItem);

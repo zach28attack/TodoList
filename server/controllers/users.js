@@ -6,8 +6,7 @@ exports.signup = async (req, res, next) => {
   user.email = email;
   user.password = password;
   if (user.password === passwordConfirmation) {
-    const newUser = await user.saveNewUser();
-    req.session.user = newUser;
+    user.saveNewUser();
     res.status(200).json({
       message: "new user saved",
     });
