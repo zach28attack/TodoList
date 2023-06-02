@@ -28,10 +28,10 @@ router.post("/user", UsersController.signup);
 router.delete("/user/:id", UsersController.deleteUser);
 
 // new session route
-router.post("./user/login", UsersController.login);
+router.post("/user/login", UsersController.login);
 
 // delete session route
-router.get("./user/logout", UsersController.logout);
+router.get("/user/logout", UsersController.logout);
 
 // new item route
 router.post("/collection/:collectionId/item", ItemsController.saveNewItem);
