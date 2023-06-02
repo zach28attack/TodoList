@@ -29,7 +29,16 @@ exports.login = async (req, res, next) => {
   user.email = email;
   user.password = password;
   if (user.email && user.password) {
-    user.login();
+    const id = await user.login();
+    res.status(200).json({
+      message: "Login successful",
+      id: id,
+    });
+  } else {
+    res.status(400),
+      json({
+        message: "login unsuccessful",
+      });
   }
 };
 
