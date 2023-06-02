@@ -84,3 +84,18 @@ export async function saveNewUser(email, password, passwordConfirmation) {
     console.error(error);
   }
 }
+
+export async function loginUser(email, password) {
+  console.log("Working");
+  // try {
+  //   const response = await fetch("http://localhost:3000/user/login", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({email: email, password: password}),
+  //   });
+  // } catch (error) {
+  //   console.error(error);
+  // }
+}
