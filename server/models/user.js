@@ -21,7 +21,8 @@ class User {
   async login() {
     const db = await database.connectToDatabase();
     const result = await db.collection("users").findOne({email: this.email, password: this.password});
-    return result._id.toString();
+    this._id = result._id.toString();
+    return this;
   }
 
   //
