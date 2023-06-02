@@ -1,5 +1,5 @@
 const User = require("../models/user.js");
-const jwt = require("jsonwebtoken");
+const {genToken} = require("../utility/jwtAuth.js");
 
 exports.signup = async (req, res, next) => {
   const {email, password, passwordConfirmation} = req.body;
@@ -24,7 +24,7 @@ exports.deleteUser = async (req, res, next) => {
   user.deleteUser;
 };
 
-// Add bcrypt encryption to password
+// TODO: Add bcrypt encryption to password
 exports.login = async (req, res, next) => {
   try {
     const {email, password} = req.body;
@@ -34,13 +34,12 @@ exports.login = async (req, res, next) => {
     user.password = password;
 
     if (user.email && user.password) {
-      const payload = {email: user.email};
-      const secretKey = "1212";
-      const token = jwt.sign(payload, secretKey, {expiresIn: "1h"});
+      const validUser = await user.login();
+      const token = await genToken(validUser._id);
 
       res.status(200).json({
         message: "Login successful",
-        id: user.id,
+        id: validUser._id,
         token: token,
       });
     } else {
