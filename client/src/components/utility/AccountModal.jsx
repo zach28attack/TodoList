@@ -1,24 +1,15 @@
 import Class from "./AccountModal.module.css";
-import {saveNewUser} from "../../api.jsx";
+import {saveNewUser, loginUser} from "../../api.jsx";
 import {useState} from "react";
+import NewAccountForm from "./NewAccountForm";
+import LoginForm from "./LoginForm";
 
 const Form = (props) => {
-  const [emailInput, setEmailInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
-  const [passwordConfirmationInput, setPasswordConfirmationInput] = useState("");
-
-  const emailInputHandler = (input) => {
-    setEmailInput(input.target.value);
-  };
-  const setPasswordInputHandler = (input) => {
-    setPasswordInput(input.target.value);
-  };
-  const setPasswordConfirmationInputHandler = (input) => {
-    setPasswordConfirmationInput(input.target.value);
-  };
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = (emailInput, passwordInput, passwordConfirmationInput) => {
     saveNewUser(emailInput, passwordInput, passwordConfirmationInput);
+  };
+  const loginHandler = (emailInput, passwordInput) => {
+    loginUser(emailInput, passwordInput);
   };
 
   return (
@@ -26,19 +17,11 @@ const Form = (props) => {
       <button className={Class.closeBtn} onClick={props.removeModalHandler}>
         X
       </button>
-
-      <form action="">
-        <label>Email</label>
-        <input type="text" name="email" onChange={emailInputHandler}></input>
-
-        <label>Password</label>
-        <input type="text" name="password" onChange={setPasswordInputHandler}></input>
-
-        <label>Password-confirmation</label>
-        <input type="text" name="password-confirmation" onChange={setPasswordConfirmationInputHandler}></input>
-
-        <button onClick={submitHandler}>submit</button>
-      </form>
+      new user form
+      <NewAccountForm onFormSubmit={submitHandler} />
+      <hr />
+      LoginForm
+      <LoginForm onLoginFormSubmit={loginHandler} />
     </div>
   );
 };
