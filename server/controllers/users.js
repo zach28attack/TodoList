@@ -35,7 +35,7 @@ exports.login = async (req, res, next) => {
 
     if (user.email && user.password) {
       const payload = {email: user.email};
-      const secretKey = "your-secret-key";
+      const secretKey = "1212";
       const token = jwt.sign(payload, secretKey, {expiresIn: "1h"});
 
       res.status(200).json({
