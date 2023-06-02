@@ -17,10 +17,20 @@ class User {
     const db = await database.connectToDatabase();
     const result = await db.collection("users").deleteOne({_id: new mongoDB.ObjectId(this._id)});
   }
+  async login() {
+    const db = await database.connectToDatabase();
+    const result = await db.collection("users").findOne({email: this.email, password: this.password});
+  }
+  //
+  //
+  // DEVELOPMENT ONLY
   async DeleteAllUsers() {
     const db = await database.connectToDatabase();
     const result = await db.collection("users").deleteMany();
   }
+  //
+  //
+  //
 }
 
 module.exports = User;
