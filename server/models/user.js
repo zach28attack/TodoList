@@ -1,4 +1,4 @@
-const database = require("../database.js");
+const database = require("../utility/database.js");
 const mongoDB = require("mongodb");
 
 class User {
