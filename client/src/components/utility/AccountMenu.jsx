@@ -5,23 +5,53 @@ import AccountModal from "./AccountModal.jsx";
 
 function AccountMenu(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const accountClickHandler = () => {
-    setIsModalVisible(!isModalVisible);
-  };
   const removeModalHandler = () => {
     setIsModalVisible(!isModalVisible);
   };
+  const accountClickHandler = () => {
+    setIsModalVisible(!isModalVisible);
+    // edit user credentials
+  };
+  const signUpClickHandler = () => {
+    setIsModalVisible(!isModalVisible);
+    // create new user
+  };
+
+  const logoutHandler = () => {
+    // delete user session
+  };
+
+  const loginHandler = () => {
+    // setIsModalVisible(!isModalVisible);
+    // use modal to validate credentials and create session
+  };
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
   return (
     <div className={props.className}>
       <ul className={Class.list}>
         <li>
-          <button className={Class.button} onClick={accountClickHandler}>
-            Account
-          </button>
+          {isSignedIn ? (
+            <button className={Class.button} onClick={accountClickHandler}>
+              Account
+            </button>
+          ) : (
+            <button className={Class.button} onClick={signUpClickHandler}>
+              Sign up
+            </button>
+          )}
         </li>
         <li className={Class.listItem}>|</li>
         <li>
-          <button className={Class.button}>Sign-out</button>
+          {isSignedIn ? (
+            <button className={Class.button} onClick={logoutHandler}>
+              Log out
+            </button>
+          ) : (
+            <button className={Class.button} onClick={loginHandler}>
+              Log in
+            </button>
+          )}
         </li>
       </ul>
       {isModalVisible &&
