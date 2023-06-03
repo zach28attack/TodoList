@@ -28,7 +28,6 @@ exports.deleteUser = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const {email, password} = req.body;
-
     const user = new User();
     user.email = email;
     user.password = password;
@@ -36,7 +35,6 @@ exports.login = async (req, res, next) => {
     if (user.email && user.password) {
       const validUser = await user.login();
       const token = await genToken(validUser._id);
-
       res.status(200).json({
         message: "Login successful",
         id: validUser._id,
@@ -46,7 +44,6 @@ exports.login = async (req, res, next) => {
       res.status(400).json({message: "Missing email or password"});
     }
   } catch (error) {
-    // Handle errors appropriately, e.g., log the error or send an error response
     res.status(500).json({message: "An error occurred"});
   }
 };
