@@ -1,9 +1,10 @@
+import Cookies from "js-cookie";
+
 export async function fetchAll() {
   try {
     const response = await fetch("http://localhost:3000/collections", {
-      method: "get",
+      method: "GET",
     });
-
     const data = await response.json();
     // console.log("successful MSG:", data);
     return data.data;
@@ -12,6 +13,7 @@ export async function fetchAll() {
     return;
   }
 }
+
 export async function deleteCollectionById(id) {
   try {
     const response = await fetch(`http://localhost:3000/collections/${id}`, {
@@ -43,20 +45,24 @@ export async function saveCollection(name) {
 }
 
 export async function saveItem(itemName, collectionId) {
+  console.log("Cookies:", Cookies.get());
   try {
     const response = await fetch(`http://localhost:3000/collection/${collectionId}/item`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({itemName: itemName}),
     });
+
     const data = await response.json();
     console.log("message:", data);
   } catch (error) {
     console.error("Failed to save item:", error);
   }
 }
+
 export async function deleteItemByIndex(index, collectionId) {
   try {
     const response = await fetch(`http://localhost:3000/collection/${collectionId}/item/${index}`, {
@@ -85,7 +91,7 @@ export async function saveNewUser(email, password, passwordConfirmation) {
   }
 }
 
-export async function loginUser(email, password) {
+export async function loginUser(email, password, token) {
   try {
     const response = await fetch("http://localhost:3000/user/login", {
       method: "POST",
@@ -96,7 +102,28 @@ export async function loginUser(email, password) {
     });
     const data = await response.json();
     console.log("message", data.message);
+    Cookies.set("token", data.token, {expires: 1}); // expires after one day
+    Cookies.set("userId", data.id, {expires: 1});
+    Cookies.set("CookiesSet", true, {expires: 1});
+    console.log("Cookies:", Cookies.get());
     return data.id;
+  } catch (error) {
+    throw error;
+    console.error(error);
+  }
+}
+
+export async function testAuth() {
+  console.log("Cookies:", Cookies.get());
+
+  try {
+    fetch("http://localhost:3000/user/logout", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    });
   } catch (error) {
     console.error(error);
   }
