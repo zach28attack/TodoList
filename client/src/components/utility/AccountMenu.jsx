@@ -2,6 +2,7 @@ import Class from "./AccountMenu.module.css";
 import {useState} from "react";
 import {createPortal} from "react-dom";
 import AccountModal from "./AccountModal.jsx";
+import {testAuth} from "../../api.jsx";
 
 function AccountMenu(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -22,6 +23,7 @@ function AccountMenu(props) {
   };
 
   const loginHandler = () => {
+    testAuth();
     // setIsModalVisible(!isModalVisible);
     // use modal to validate credentials and create session
   };
