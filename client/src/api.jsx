@@ -104,26 +104,28 @@ export async function loginUser(email, password, token) {
     console.log("message", data.message);
     Cookies.set("token", data.token, {expires: 1}); // expires after one day
     Cookies.set("userId", data.id, {expires: 1});
-    Cookies.set("CookiesSet", true, {expires: 1});
-    console.log("Cookies:", Cookies.get());
     return data.id;
   } catch (error) {
     throw error;
-    console.error(error);
   }
 }
 
-export async function testAuth() {
-  console.log("Cookies:", Cookies.get());
+export async function logout() {
+  console.log("Cookies before logout:", Cookies.get());
 
   try {
-    fetch("http://localhost:3000/user/logout", {
+    const response = await fetch("http://localhost:3000/user/logout", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
+    response.json();
+    if (response.ok) {
+      Cookies.remove("token");
+      Cookies.remove("userId");
+    }
   } catch (error) {
     console.error(error);
   }
