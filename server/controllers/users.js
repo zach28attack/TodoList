@@ -46,7 +46,22 @@ exports.login = async (req, res, next) => {
   }
 };
 
-exports.logout = async (req, res, next) => {};
+exports.logout = async (req, res, next) => {
+  try {
+    const user = new User();
+    user._id = req.userId;
+    user.token = req.token;
+    user.logout();
+    res.status(200).json({
+      message: "Logout successful",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Logout failed",
+    });
+    throw error;
+  }
+};
 
 exports.deleteAll = async (req, res, next) => {
   const user = new User();
