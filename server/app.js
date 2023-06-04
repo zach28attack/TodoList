@@ -4,7 +4,7 @@ const app = express();
 const ItemsController = require("./controllers/items.js");
 const UsersController = require("./controllers/users.js");
 const CollectionsController = require("./controllers/collections.js");
-const authenticateRoute = require("./utility/authenticate.js");
+const authenticateUser = require("./utility/authenticateUser.js");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5173");
@@ -23,7 +23,7 @@ app.use(express.json());
 router.post("/user/login", UsersController.login);
 
 // delete user cookies route
-router.get("/user/logout", authenticateRoute, UsersController.logout);
+router.get("/user/logout", authenticateUser, UsersController.logout);
 
 // delete user by id
 router.delete("/user/:id", UsersController.deleteUser);
