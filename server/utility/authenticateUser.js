@@ -4,6 +4,7 @@ module.exports = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
 
   let decodedToken;
+
   try {
     if (token) {
       decodedToken = jwt.verify(token, "newKey");
@@ -19,5 +20,6 @@ module.exports = async (req, res, next) => {
     throw error;
   }
   req.userId = decodedToken.id;
+  req.token = token;
   next();
 };
