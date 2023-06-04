@@ -1,5 +1,4 @@
 const User = require("../models/user.js");
-const {genToken} = require("../utility/jwtAuth.js");
 
 exports.signup = async (req, res, next) => {
   const {email, password, passwordConfirmation} = req.body;
@@ -33,12 +32,11 @@ exports.login = async (req, res, next) => {
     user.password = password;
 
     if (user.email && user.password) {
-      const validUser = await user.login();
-      const token = await genToken(validUser._id);
+      await user.login();
       res.status(200).json({
         message: "Login successful",
-        id: validUser._id,
-        token: token,
+        id: user._id,
+        token: user.token,
       });
     } else {
       res.status(400).json({message: "Missing email or password"});
