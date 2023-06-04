@@ -26,22 +26,22 @@ router.post("/user/login", UsersController.login);
 router.get("/user/logout", authenticateUser, UsersController.logout);
 
 // delete user by id
-router.delete("/user/:id", authenticateUser, UsersController.deleteUser);
+router.delete("/user/:id", UsersController.deleteUser);
 
 // new user route
 router.post("/user", UsersController.signup);
 
 // new item route
-router.post("/collection/:collectionId/item", authenticateUser, ItemsController.saveNewItem);
+router.post("/collection/:collectionId/item", ItemsController.saveNewItem);
 
 // delete item route
-router.delete("/collection/:collectionId/item/:itemIndex", authenticateUser, ItemsController.deleteItem);
+router.delete("/collection/:collectionId/item/:itemIndex", ItemsController.deleteItem);
 
 // new collection route
-router.post("/collection", authenticateUser, CollectionsController.saveNewCollection);
+router.post("/collection", CollectionsController.saveNewCollection);
 
 // get all collections route
-router.get("/collections", authenticateUser, CollectionsController.getAllCollections);
+router.get("/collections", CollectionsController.getAllCollections);
 
 // DEVELOPMENT ONLY
 app.use("/delete-all-users", UsersController.deleteAll);
