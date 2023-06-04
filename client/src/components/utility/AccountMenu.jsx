@@ -2,10 +2,12 @@ import Class from "./AccountMenu.module.css";
 import {useState} from "react";
 import {createPortal} from "react-dom";
 import AccountModal from "./AccountModal.jsx";
-import {testAuth} from "../../api.jsx";
+import {logout} from "../../api.jsx";
+import Cookies from "js-cookie";
 
 function AccountMenu(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
+
   const removeModalHandler = () => {
     setIsModalVisible(!isModalVisible);
   };
@@ -23,11 +25,12 @@ function AccountMenu(props) {
   };
 
   const loginHandler = () => {
-    testAuth();
+    logout();
     // setIsModalVisible(!isModalVisible);
     // use modal to validate credentials and create session
   };
   const [isSignedIn, setIsSignedIn] = useState(false);
+  console.log(Cookies.get());
 
   return (
     <div className={props.className}>
