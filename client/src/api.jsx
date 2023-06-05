@@ -104,7 +104,7 @@ export async function loginUser(email, password, token) {
     console.log("message", data.message);
     Cookies.set("token", data.token, {expires: 1}); // expires after one day
     Cookies.set("userId", data.id, {expires: 1});
-    return data.id;
+    return true;
   } catch (error) {
     throw error;
   }
