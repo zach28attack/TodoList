@@ -24,4 +24,5 @@ This is a simple todo list application which enables users to keep track of ever
 - body-parser
 - mongo-db
 - express
+- nodemon
 
