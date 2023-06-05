@@ -111,8 +111,6 @@ export async function loginUser(email, password, token) {
 }
 
 export async function logout() {
-  console.log("Cookies before logout:", Cookies.get());
-
   try {
     const response = await fetch("http://localhost:3000/user/logout", {
       method: "GET",
@@ -121,7 +119,6 @@ export async function logout() {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-    response.json();
     if (response.ok) {
       Cookies.remove("token");
       Cookies.remove("userId");
