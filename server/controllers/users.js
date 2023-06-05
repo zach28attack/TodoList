@@ -63,6 +63,30 @@ exports.logout = async (req, res, next) => {
   }
 };
 
+exports.edit = async (req, res, next) => {
+  try {
+    const user = new User();
+    user._id = req.params.id;
+    user.email = req.body.email;
+    user.password = req.body.password;
+    if (user.password === req.body.passwordConfirmation) {
+      const result = await user.update();
+      console.log(result);
+      res.status(200).json({
+        message: "user updated",
+      });
+    } else {
+      res.status(401).json({
+        message: "Passwords dont match",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "user not updated",
+    });
+  }
+};
+
 exports.deleteAll = async (req, res, next) => {
   const user = new User();
   user.DeleteAllUsers();

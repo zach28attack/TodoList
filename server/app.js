@@ -28,6 +28,9 @@ router.get("/user/logout", authenticateUser, UsersController.logout);
 // delete user by id
 router.delete("/user/:id", UsersController.deleteUser);
 
+// edit user route
+router.patch("/user/edit/:id", authenticateUser, UsersController.edit);
+
 // new user route
 router.post("/user", UsersController.signup);
 

@@ -42,6 +42,18 @@ class User {
     db.collection("tokens").updateOne({revoked: false, token: this.token, userId: this._id}, {$set: {revoked: true}});
   }
 
+  async update() {
+    try {
+      const db = await database.connectToDatabase();
+      const result = await db
+        .collection("users")
+        .updateOne({_id: new mongoDB.ObjectId(this._id)}, {$set: {email: this.email, password: this.password}});
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   //
   //
   // DEVELOPMENT ONLY
