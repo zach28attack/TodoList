@@ -2,17 +2,18 @@ const database = require("../utility/database.js");
 const mongoDB = require("mongodb");
 
 class Collection {
-  constructor(id, name, items, itemName, itemIsCompleted) {
+  constructor(id, name, items, itemName, itemIsCompleted, userId) {
     this._id = id;
     this.name = name;
     this.items = items;
     this.itemIsCompleted = itemIsCompleted;
     this.itemName = itemName;
+    this.userId = userId;
   }
   async saveCollection() {
     try {
       const db = await database.connectToDatabase();
-      const result = await db.collection("collections").insertOne({name: this.name, items: []});
+      const result = await db.collection("collections").insertOne({name: this.name, userId: this.userId, items: []});
       return result.insertedId.toString(); // Retrieve the saved object's id
     } catch (error) {
       console.error("Error caught", error);
@@ -60,7 +61,7 @@ class Collection {
 
   async fetchAll() {
     const db = await database.connectToDatabase();
-    return (await db.collection("collections").find().toArray()).reverse();
+    return (await db.collection("collections").find({userId: this.userId}).toArray()).reverse();
   }
   async deleteAll() {
     const db = await database.connectToDatabase();
