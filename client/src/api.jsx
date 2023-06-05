@@ -86,10 +86,12 @@ export async function saveNewUser(email, password, passwordConfirmation) {
     });
     const data = await response.json();
     console.log("message", data.message);
-    Cookies.set("token", data.token, {expires: 1}); // expires after one day
-    Cookies.set("userId", data.id, {expires: 1});
-    Cookies.set("email", email, {expires: 1});
-    console.log(data);
+    if (response.ok) {
+      Cookies.set("token", data.token, {expires: 1}); // expires after one day
+      Cookies.set("userId", data.id, {expires: 1});
+      Cookies.set("email", email, {expires: 1});
+      return true;
+    }
   } catch (error) {
     console.error(error);
   }
@@ -106,10 +108,12 @@ export async function loginUser(email, password, token) {
     });
     const data = await response.json();
     console.log("message", data.message);
-    Cookies.set("token", data.token, {expires: 1}); // expires after one day
-    Cookies.set("userId", data.id, {expires: 1});
-    Cookies.set("email", email, {expires: 1});
-    return true;
+    if (response.ok) {
+      Cookies.set("token", data.token, {expires: 1}); // expires after one day
+      Cookies.set("userId", data.id, {expires: 1});
+      Cookies.set("email", email, {expires: 1});
+      return true;
+    }
   } catch (error) {
     throw error;
   }
@@ -125,7 +129,6 @@ export async function logout() {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-    console.log("response:", response);
     if (response.ok) {
       Cookies.remove("token");
       Cookies.remove("userId");
