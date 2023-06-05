@@ -8,7 +8,7 @@ import {LoginContext} from "../utility/LoginContext.jsx";
 
 function Collections(props) {
   const [isRotated, setIsRotated] = useState(false);
-  const {loggedIn} = useContext(LoginContext);
+  const {loggedIn, isCollectionsEmpty} = useContext(LoginContext);
 
   const submitCollectionHandler = (name) => {
     props.submitCollection(name);
@@ -24,13 +24,15 @@ function Collections(props) {
     <div className={Class.border}>
       <h1 className={Class.header}>
         Lists
-        <button className={`${Class.button}`} onClick={formVisibleHandler}>
-          <RiAddCircleLine className={`${Class.buttonOrigin} ${isRotated ? Class.rotate : undefined}`} />
-        </button>
+        {loggedIn && (
+          <button className={`${Class.button}`} onClick={formVisibleHandler}>
+            <RiAddCircleLine className={`${Class.buttonOrigin} ${isRotated ? Class.rotate : undefined}`} />
+          </button>
+        )}
       </h1>
       {formVisible && <CollectionForm submitCollection={submitCollectionHandler} />}
 
-      {!props.isLoading ? (
+      {!props.isLoading && !isCollectionsEmpty ? (
         props.collectionsArray.map((collection) => (
           <Collection
             name={collection.name}
@@ -40,7 +42,7 @@ function Collections(props) {
             activeCollection={props.activeCollection}
           />
         ))
-      ) : loggedIn ? (
+      ) : loggedIn && !isCollectionsEmpty ? (
         <AiOutlineLoading className={Class.loading} />
       ) : undefined}
     </div>
