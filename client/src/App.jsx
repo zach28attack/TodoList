@@ -3,11 +3,13 @@ import Collections from "./components/collection/Collections.jsx";
 import List from "./components/list/List.jsx";
 import {useState, useEffect} from "react";
 import {fetchAll, saveCollection, saveItem, deleteItemByIndex} from "./api.jsx";
+import Cookies from "js-cookie";
 
 function App() {
   const [collections, setCollections] = useState([]);
   const [activeCollection, setActiveCollection] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [signedInId, setSignedInId] = useState(Cookies.get("userId"));
 
   const getCollections = async () => {
     try {
@@ -42,7 +44,6 @@ function App() {
       const index = updatedCollections.findIndex((collection) => {
         return collection._id === collectionId;
       });
-
       if (index !== -1) {
         updatedCollections[index].items = updatedCollections[index].items.filter((item, index) => {
           return index !== itemIndex; //TODO: update to reflex each items id when connected to db
