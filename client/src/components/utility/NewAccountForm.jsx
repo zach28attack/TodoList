@@ -1,12 +1,9 @@
-import {useState, useContext, useEffect} from "react";
-import {LoginContext} from "./LoginContext";
-import Cookies from "js-cookie";
+import {useState} from "react";
 
 const NewAccountForm = (props) => {
-  const [emailInput, setEmailInput] = useState(Cookies.get("email"));
+  const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordConfirmationInput, setPasswordConfirmationInput] = useState("");
-  const {loggedin} = useContext(LoginContext);
 
   const emailInputHandler = (input) => {
     setEmailInput(input.target.value);
