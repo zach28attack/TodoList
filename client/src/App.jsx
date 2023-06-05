@@ -7,13 +7,14 @@ import {LoginContext} from "./components/utility/LoginContext";
 
 function App() {
   const [collections, setCollections] = useState([]);
-  const [activeCollection, setActiveCollection] = useState({});
+  const [activeCollection, setActiveCollection] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const {loggedIn, setLoggedIn} = useContext(LoginContext);
+  const {loggedIn, setLoggedIn, setIsCollectionsEmpty} = useContext(LoginContext);
 
   const getCollections = async () => {
     try {
       const collections = await fetchAll();
+      collections.length > 0 ? setIsCollectionsEmpty(false) : undefined;
       setCollections((prevCollections) => [...collections, ...prevCollections]);
       setIsLoading(false);
       setActiveCollection(collections[0]);
@@ -25,6 +26,7 @@ function App() {
   const addListItemHandler = (itemName) => {
     // console.log("addListItemHandler invoked", itemName, activeCollection._id);
     saveItem(itemName, activeCollection._id);
+    setIsCollectionsEmpty(false);
     setCollections((prevCollections) => {
       const updatedCollections = [...prevCollections];
       const index = updatedCollections.findIndex((collection) => {
@@ -51,6 +53,7 @@ function App() {
       }
       return updatedCollections;
     });
+    collections.length === 1 ? setIsCollectionsEmpty(false) : undefined;
   };
 
   const selectCollectionHandler = (id) => {
@@ -63,10 +66,10 @@ function App() {
     setCollections((prevCollections) => [newCollection, ...prevCollections]);
   };
 
-  // DeleteCollection handler
-
   useEffect(() => {
     loggedIn ? getCollections() : undefined;
+    !loggedIn ? setCollections([]) : undefined;
+    setIsCollectionsEmpty(true);
   }, [loggedIn]);
 
   return (
