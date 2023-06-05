@@ -13,6 +13,11 @@ class User {
     const db = await database.connectToDatabase();
     const result = await db.collection("users").insertOne({email: this.email, password: this.password});
     this._id = result.insertedId.toString();
+
+    this.token = await genToken(this._id);
+    // generate an auth token with user.id
+    db.collection("tokens").insertOne({token: this.token, userId: this._id, revoked: false, createdAt: new Date()});
+    // save token to db
     return this;
   }
   async deleteUser() {
@@ -53,17 +58,6 @@ class User {
       console.error(error);
     }
   }
-
-  //
-  //
-  // DEVELOPMENT ONLY
-  async DeleteAllUsers() {
-    const db = await database.connectToDatabase();
-    const result = await db.collection("users").deleteMany();
-  }
-  //
-  //
-  //
 }
 
 module.exports = User;

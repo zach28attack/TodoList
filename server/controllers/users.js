@@ -6,9 +6,12 @@ exports.signup = async (req, res, next) => {
   user.email = email;
   user.password = password;
   if (user.password === passwordConfirmation) {
-    user.saveNewUser();
+    await user.saveNewUser();
     res.status(200).json({
       message: "new user saved",
+      id: user._id,
+      token: user.token,
+      email: user.email,
     });
   } else {
     res.status(400).json({
@@ -71,7 +74,6 @@ exports.edit = async (req, res, next) => {
     user.password = req.body.password;
     if (user.password === req.body.passwordConfirmation) {
       const result = await user.update();
-      console.log(result);
       res.status(200).json({
         message: "user updated",
       });
@@ -85,9 +87,4 @@ exports.edit = async (req, res, next) => {
       message: "user not updated",
     });
   }
-};
-
-exports.deleteAll = async (req, res, next) => {
-  const user = new User();
-  user.DeleteAllUsers();
 };

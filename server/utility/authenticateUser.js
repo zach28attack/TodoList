@@ -6,6 +6,7 @@ module.exports = async (req, res, next) => {
   // extract token from auth header
   let decodedToken;
   // initialize var
+
   try {
     if (token) {
       decodedToken = jwt.verify(token, "newKey");
@@ -21,13 +22,16 @@ module.exports = async (req, res, next) => {
       } else {
         const error = new Error("Token is expired");
         error.statusCode = 400;
+        console.error(error);
       }
     }
   } catch (error) {
     error.statusCode = 500;
+    console.error(error);
   }
   if (!decodedToken) {
     const error = new Error("Not Authenticated");
     error.statusCode = 401;
+    console.error(error);
   }
 };

@@ -85,6 +85,10 @@ export async function saveNewUser(email, password, passwordConfirmation) {
       body: JSON.stringify({email: email, password: password, passwordConfirmation: passwordConfirmation}),
     });
     const data = await response.json();
+    console.log("message", data.message);
+    Cookies.set("token", data.token, {expires: 1}); // expires after one day
+    Cookies.set("userId", data.id, {expires: 1});
+    Cookies.set("email", email, {expires: 1});
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -112,6 +116,7 @@ export async function loginUser(email, password, token) {
 }
 
 export async function logout() {
+  console.log("logout!", Cookies.get("token"));
   try {
     const response = await fetch("http://localhost:3000/user/logout", {
       method: "GET",
@@ -120,6 +125,7 @@ export async function logout() {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
+    console.log("response:", response);
     if (response.ok) {
       Cookies.remove("token");
       Cookies.remove("userId");

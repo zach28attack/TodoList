@@ -22,7 +22,7 @@ app.use(express.json());
 // new session route
 router.post("/user/login", UsersController.login);
 
-// delete user cookies route
+// revoke auth token
 router.get("/user/logout", authenticateUser, UsersController.logout);
 
 // delete user by id
@@ -45,9 +45,6 @@ router.post("/collection", CollectionsController.saveNewCollection);
 
 // get all collections route
 router.get("/collections", CollectionsController.getAllCollections);
-
-// DEVELOPMENT ONLY
-app.use("/delete-all-users", UsersController.deleteAll);
 
 app.use(router);
 
