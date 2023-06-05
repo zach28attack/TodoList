@@ -1,12 +1,12 @@
 import Class from "./AccountModal.module.css";
-import {saveNewUser, loginUser} from "../../api.jsx";
+import {saveNewUser, loginUser, updateUser} from "../../api.jsx";
 import NewAccountForm from "./NewAccountForm";
 import LoginForm from "./LoginForm";
 import {LoginContext} from "./LoginContext";
 import {useContext} from "react";
 
 const Form = (props) => {
-  const {loggedIn, setLoggedIn} = useContext(LoginContext);
+  const {setLoggedIn} = useContext(LoginContext);
 
   const submitHandler = async (emailInput, passwordInput, passwordConfirmationInput) => {
     const success = await saveNewUser(emailInput, passwordInput, passwordConfirmationInput);
@@ -38,7 +38,28 @@ const Form = (props) => {
   );
 };
 
+const EditForm = (props) => {
+  const editLoginHandler = async (emailInput, passwordInput, passwordConfirmationInput) => {
+    if (passwordInput === passwordConfirmationInput) {
+      const success = await updateUser(emailInput, passwordInput, passwordConfirmationInput);
+      console.log(success);
+    }
+  };
+  const deleteHandler = async () => {};
+
+  return (
+    <div>
+      <button className={Class.closeBtn} onClick={props.removeModalHandler}>
+        X
+      </button>
+      <h2>Edit Account</h2>
+      <NewAccountForm onFormSubmit={editLoginHandler} />
+    </div>
+  );
+};
+
 function AccountModal(props) {
+  const {loggedIn} = useContext(LoginContext);
   const removeModalHandler = (e) => {
     if (e.target.classList.contains(Class.modalBackground) || e.target.classList.contains(Class.closeBtn)) {
       props.removeModal();
@@ -48,7 +69,7 @@ function AccountModal(props) {
   return (
     <div className={Class.modalBackground} onClick={removeModalHandler}>
       <div className={Class.modalContent}>
-        <Form removeModal={props.removeModal} />
+        {loggedIn ? <EditForm removeModal={props.removeModal} /> : <Form removeModal={props.removeModal} />}
       </div>
     </div>
   );
