@@ -5,6 +5,7 @@ export const LoginContext = createContext();
 
 export function LoginContextProvider(props) {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isCollectionsEmpty, setIsCollectionsEmpty] = useState(true);
 
   useEffect(() => {
     if (Cookies.get("token")) {
@@ -12,5 +13,9 @@ export function LoginContextProvider(props) {
     }
   }, []);
 
-  return <LoginContext.Provider value={{loggedIn, setLoggedIn}}>{props.children}</LoginContext.Provider>;
+  return (
+    <LoginContext.Provider value={{loggedIn, setLoggedIn, isCollectionsEmpty, setIsCollectionsEmpty}}>
+      {props.children}
+    </LoginContext.Provider>
+  );
 }
