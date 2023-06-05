@@ -3,13 +3,12 @@ import Collections from "./components/collection/Collections.jsx";
 import List from "./components/list/List.jsx";
 import {useState, useEffect} from "react";
 import {fetchAll, saveCollection, saveItem, deleteItemByIndex} from "./api.jsx";
-import Cookies from "js-cookie";
+import {LoginContextProvider} from "./components/utility/LoginContext";
 
 function App() {
   const [collections, setCollections] = useState([]);
   const [activeCollection, setActiveCollection] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [signedInId, setSignedInId] = useState(Cookies.get("userId"));
 
   const getCollections = async () => {
     try {
@@ -72,21 +71,24 @@ function App() {
   }, []);
 
   return (
-    <div className={app.grid}>
-      <Collections
-        isLoading={isLoading}
-        collectionsArray={collections}
-        onCollectionSelect={selectCollectionHandler}
-        submitCollection={submitCollectionHandler}
-        activeCollection={activeCollection}
-      />
-      <List
-        isLoading={isLoading}
-        collection={activeCollection}
-        onDeleteItem={deleteListItemHandler}
-        submitHandler={addListItemHandler}
-      />
-    </div>
+    <LoginContextProvider>
+      {/* TODO: check if syntax for context api is correct */}
+      <div className={app.grid}>
+        <Collections
+          isLoading={isLoading}
+          collectionsArray={collections}
+          onCollectionSelect={selectCollectionHandler}
+          submitCollection={submitCollectionHandler}
+          activeCollection={activeCollection}
+        />
+        <List
+          isLoading={isLoading}
+          collection={activeCollection}
+          onDeleteItem={deleteListItemHandler}
+          submitHandler={addListItemHandler}
+        />
+      </div>
+    </LoginContextProvider>
   );
 }
 

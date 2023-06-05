@@ -1,9 +1,9 @@
 import Class from "./AccountMenu.module.css";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import {createPortal} from "react-dom";
 import AccountModal from "./AccountModal.jsx";
 import {logout} from "../../api.jsx";
-import Cookies from "js-cookie";
+import {LoginContext} from "../utility/LoginContext.jsx";
 
 function AccountMenu(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -22,21 +22,22 @@ function AccountMenu(props) {
 
   const logoutHandler = () => {
     // delete user session
+    logout();
+    setLoggedIn(false);
   };
 
   const loginHandler = () => {
-    logout();
     // setIsModalVisible(!isModalVisible);
     // use modal to validate credentials and create session
   };
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  console.log(Cookies.get());
+
+  const {loggedIn, setLoggedIn} = useContext(LoginContext);
 
   return (
     <div className={props.className}>
       <ul className={Class.list}>
         <li>
-          {isSignedIn ? (
+          {loggedIn ? (
             <button className={Class.button} onClick={accountClickHandler}>
               Account
             </button>
@@ -48,7 +49,7 @@ function AccountMenu(props) {
         </li>
         <li className={Class.listItem}>|</li>
         <li>
-          {isSignedIn ? (
+          {loggedIn ? (
             <button className={Class.button} onClick={logoutHandler}>
               Log out
             </button>
