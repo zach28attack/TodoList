@@ -34,15 +34,15 @@ exports.login = async (req, res, next) => {
     user.email = email;
     user.password = password;
 
-    if (user.email && user.password) {
-      await user.login();
+    await user.login();
+    if (user.token) {
       res.status(200).json({
         message: "Login successful",
         id: user._id,
         token: user.token,
       });
     } else {
-      res.status(400).json({message: "Missing email or password"});
+      res.status(400).json({message: "Wrong email or Password"});
     }
   } catch (error) {
     res.status(500).json({message: "An error occurred"});
