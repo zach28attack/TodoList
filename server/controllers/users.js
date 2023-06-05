@@ -66,7 +66,7 @@ exports.logout = async (req, res, next) => {
   }
 };
 
-exports.edit = async (req, res, next) => {
+exports.update = async (req, res, next) => {
   try {
     const user = new User();
     user._id = req.params.id;
