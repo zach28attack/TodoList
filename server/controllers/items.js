@@ -5,7 +5,7 @@ exports.saveNewItem = async (req, res, next) => {
   const id = req.params.collectionId;
   const itemName = req.body.itemName;
 
-  collection.id = id;
+  collection._id = id;
   collection.itemName = itemName; // set random name
   collection.itemIsCompleted = false; // set property
   collection.saveItem(); // save collection to database
@@ -20,7 +20,7 @@ exports.deleteItem = async (req, res, next) => {
   const id = req.params.collectionId;
   const itemIndex = req.params.itemIndex;
 
-  collection.id = id;
+  collection._id = id;
   const status = await collection.deleteItemByIndex(itemIndex);
   if (status === 200) {
     res.status(200).json({
