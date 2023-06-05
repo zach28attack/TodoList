@@ -13,22 +13,14 @@ function AccountMenu(props) {
   };
   const accountClickHandler = () => {
     setIsModalVisible(!isModalVisible);
-    // edit user credentials
   };
   const signUpClickHandler = () => {
     setIsModalVisible(!isModalVisible);
-    // create new user
   };
 
   const logoutHandler = () => {
-    // delete user session
     logout();
     setLoggedIn(false);
-  };
-
-  const loginHandler = () => {
-    // setIsModalVisible(!isModalVisible);
-    // use modal to validate credentials and create session
   };
 
   const {loggedIn, setLoggedIn} = useContext(LoginContext);
@@ -53,11 +45,7 @@ function AccountMenu(props) {
             <button className={Class.button} onClick={logoutHandler}>
               Log out
             </button>
-          ) : (
-            <button className={Class.button} onClick={loginHandler}>
-              Log in
-            </button>
-          )}
+          ) : undefined}
         </li>
       </ul>
       {isModalVisible &&
