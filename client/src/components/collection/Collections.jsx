@@ -1,12 +1,15 @@
 import Collection from "./Collection.jsx";
 import Class from "./Collections.module.css";
 import CollectionForm from "../utility/CollectionForm.jsx";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import {RiAddCircleLine} from "react-icons/ri";
 import {AiOutlineLoading} from "react-icons/ai";
+import {LoginContext} from "../utility/LoginContext.jsx";
 
 function Collections(props) {
   const [isRotated, setIsRotated] = useState(false);
+  const {loggedIn} = useContext(LoginContext);
+
   const submitCollectionHandler = (name) => {
     props.submitCollection(name);
     setIsRotated(!isRotated);
@@ -37,9 +40,9 @@ function Collections(props) {
             activeCollection={props.activeCollection}
           />
         ))
-      ) : (
+      ) : loggedIn ? (
         <AiOutlineLoading className={Class.loading} />
-      )}
+      ) : undefined}
     </div>
   );
 }
