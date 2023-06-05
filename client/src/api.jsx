@@ -4,6 +4,9 @@ export async function fetchAll() {
   try {
     const response = await fetch("http://localhost:3000/collections", {
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
     });
     const data = await response.json();
     // console.log("successful MSG:", data);
@@ -18,6 +21,9 @@ export async function deleteCollectionById(id) {
   try {
     const response = await fetch(`http://localhost:3000/collections/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
     });
     const data = await response.json();
     console.log("message:", data.message);
@@ -32,6 +38,7 @@ export async function saveCollection(name) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("token")}`,
       },
       body: JSON.stringify({name: name}),
     });
@@ -49,9 +56,9 @@ export async function saveItem(itemName, collectionId) {
   try {
     const response = await fetch(`http://localhost:3000/collection/${collectionId}/item`, {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("token")}`,
       },
       body: JSON.stringify({itemName: itemName}),
     });
@@ -67,6 +74,9 @@ export async function deleteItemByIndex(index, collectionId) {
   try {
     const response = await fetch(`http://localhost:3000/collection/${collectionId}/item/${index}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
     });
     const data = await response.json();
     console.log("message:", data.message);
@@ -142,7 +152,7 @@ export async function logout() {
 export async function updateUser(email, password, passwordConfirmation) {
   try {
     // authenticate and send params
-    const response = await fetch(`http://localhost:3000/user/edit/${Cookies.get("userId")}`, {
+    const response = await fetch(`http://localhost:3000/user/update/${Cookies.get("userId")}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
