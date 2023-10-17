@@ -7,7 +7,7 @@ const CollectionsController = require("./controllers/collections.js");
 const authenticateUser = require("./utility/authenticateUser.js");
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5173");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   // the * gives access every url, or you can specify multiple urls separated with commas
   res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH, DELETE");
   //you need to specify which methods should be available
